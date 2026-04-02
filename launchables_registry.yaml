@@ -1,0 +1,146 @@
+registry_version: v1
+registry_kind: LaunchablesRegistry
+source_of_truth:
+  plan: OPENCLAW_PLAN_KANBAN_CANONIQUE_V1.md
+  spec: /home/ghost/Téléchargements/SPEC_LAUNCHABLE_OPENCLAW_YAML_V1.md
+  infra: /home/ghost/Téléchargements/INFRA_ROLE_MAPPING_OPENCLAW_V1.md
+  security: /home/ghost/Téléchargements/SECURITY_POLICY_OPENCLAW_BREV_V1.md
+
+doctrine:
+  model: brev-like
+  phase: phase-2-early
+  runtime_scope: documentary-only
+  control_plane: OpenClaw
+  general_compute_targets:
+    - student
+    - cloud-gpu-future
+  db_layer_rule:
+    node: db-layer
+    role: control-plane
+    general_compute_allowed: false
+    only_exception_class: inference-local-validation
+    exception_constraints:
+      bounded: true
+      loopback_only: true
+      non_intensive: true
+      exceptional: true
+    enforcement_note: Any launchable targeting db-layer must declare the allowed exception class and restricted runtime scope.
+
+nodes:
+  db-layer:
+    role: control-plane
+    general_compute_allowed: false
+    allowed_profiles:
+      - inference
+    exception_policy:
+      required: true
+      allowed_exception_classes:
+        - inference-local-validation
+      required_runtime_scope: local-validation-only
+      required_network_mode: loopback-only
+      required_sensitivity: sensitive
+    notes: Control plane host. No general compute. Only bounded local validation inference is tolerated.
+
+  student:
+    role: compute-local
+    general_compute_allowed: true
+    allowed_profiles:
+      - lab
+      - training
+      - vision
+      - hf_build
+    exception_policy:
+      required: false
+    notes: Primary local compute target for normal workloads in V1 and early phase 2.
+
+  cloud-gpu-future:
+    role: compute-external-future
+    general_compute_allowed: true
+    allowed_profiles:
+      - training
+      - inference
+    exception_policy:
+      required: false
+    notes: Future external GPU compute target. Registry entry is documentary and preparatory.
+
+launchables:
+  - id: launchable-lab-student-v1
+    name: lab-student
+    profile: lab
+    node: student
+    status: documented
+    source: /home/ghost/Téléchargements/examples/launchable_lab_student.yaml
+    description: Session lab locale standard sur student.
+    allowed_in_phase:
+      - phase-1-docs
+      - phase-2-early
+    phase_guard: standard-compute
+    exception_class: none
+    runtime_scope: local-compute
+    restricted_reason: none
+    notes: Canonical local lab profile.
+
+  - id: launchable-training-cloud-future-v1
+    name: training-cloud-future
+    profile: training
+    node: cloud-gpu-future
+    status: future
+    source: /home/ghost/Téléchargements/examples/launchable_training_cloud_future.yaml
+    description: Profil training prevu pour compute GPU externe.
+    allowed_in_phase:
+      - phase-1-docs
+      - phase-2-early
+    phase_guard: future-compute-target
+    exception_class: none
+    runtime_scope: external-gpu-future
+    restricted_reason: Target remains documentary until cloud GPU prerequisites are validated.
+    notes: Prepares future GPU training without opening runtime integration.
+
+  - id: launchable-inference-db-layer-v1
+    name: inference-db-layer
+    profile: inference
+    node: db-layer
+    status: restricted
+    source: /home/ghost/Téléchargements/examples/launchable_inference_db_layer.yaml
+    description: Inference locale de validation bornee sur db-layer.
+    allowed_in_phase:
+      - phase-1-docs
+      - phase-2-early
+    phase_guard: control-plane-exception-only
+    exception_class: inference-local-validation
+    runtime_scope: local-validation-only
+    restricted_reason: db-layer is control-plane only and this launchable is the sole tolerated compute exception.
+    sensitivity: sensitive
+    notes: Must remain bounded, loopback-only, non-intensive and exceptional.
+
+  - id: launchable-vision-student-v1
+    name: vision-student
+    profile: vision
+    node: student
+    status: documented
+    source: /home/ghost/Téléchargements/examples/launchable_vision_student.yaml
+    description: Profil vision local de developpement sur student.
+    allowed_in_phase:
+      - phase-1-docs
+      - phase-2-early
+    phase_guard: standard-compute
+    exception_class: none
+    runtime_scope: local-compute
+    restricted_reason: none
+    notes: Canonical local vision profile.
+
+  - id: launchable-hf-build-student-v1
+    name: hf-build-student
+    profile: hf_build
+    node: student
+    status: documented
+    source: /home/ghost/Téléchargements/examples/launchable_hf_build_student.yaml
+    description: Build local de dependances et assets Hugging Face sur student.
+    allowed_in_phase:
+      - phase-1-docs
+      - phase-2-early
+    phase_guard: standard-compute
+    exception_class: none
+    runtime_scope: local-compute
+    restricted_reason: none
+    notes: Canonical non-service compute profile on student.

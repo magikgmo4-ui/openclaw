@@ -1,0 +1,49 @@
+apiVersion: openclaw/v1
+kind: Launchable
+metadata:
+  name: training-cloud-future
+  description: Profil training prevu pour compute GPU externe
+  labels:
+    profile: training
+    node: cloud-gpu-future
+spec:
+  profile: training
+  agent:
+    id: trainer-core
+    image: openclaw/trainer-core:v1
+  workspace:
+    id: ws-training-cloud-future
+    root: /srv/openclaw/workspaces/ws-training-cloud-future
+    persistence: persistent
+  node:
+    target: cloud-gpu-future
+  bootstrap:
+    profile: training
+    preset: trainer-gpu
+    env:
+      OPENCLAW_MODE: training
+      DATA_ACCESS: controlled
+  policy:
+    network:
+      mode: egress-controlled
+    auth:
+      mode: ssh-key
+    sandbox:
+      mode: restricted-container
+    exposure:
+      defaultDeny: true
+  services:
+    - name: tensorboard
+      type: tensorboard
+      enabled: true
+      bind: 127.0.0.1
+      port: 6006
+      visibility: loopback
+      auth: token
+  resources:
+    cpu: "16"
+    memory: 64Gi
+    gpu: 1
+  outputs:
+    artifactsPath: /srv/openclaw/outputs/ws-training-cloud-future/artifacts
+    logsPath: /srv/openclaw/outputs/ws-training-cloud-future/logs

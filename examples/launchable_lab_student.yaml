@@ -1,0 +1,48 @@
+apiVersion: openclaw/v1
+kind: Launchable
+metadata:
+  name: lab-student
+  description: Session lab locale standard sur student
+  labels:
+    profile: lab
+    node: student
+spec:
+  profile: lab
+  agent:
+    id: assistant-lab
+    image: openclaw/assistant-lab:v1
+  workspace:
+    id: ws-lab-student
+    root: /srv/openclaw/workspaces/ws-lab-student
+    persistence: persistent
+  node:
+    target: student
+  bootstrap:
+    profile: lab
+    preset: base-python
+    env:
+      OPENCLAW_MODE: lab
+      WORKSPACE_KIND: interactive
+  policy:
+    network:
+      mode: loopback-only
+    auth:
+      mode: local-user
+    sandbox:
+      mode: process
+    exposure:
+      defaultDeny: true
+  services:
+    - name: notebook
+      type: jupyter
+      enabled: true
+      bind: 127.0.0.1
+      port: 8888
+      visibility: loopback
+      auth: token
+  resources:
+    cpu: "4"
+    memory: 8Gi
+  outputs:
+    artifactsPath: /srv/openclaw/outputs/ws-lab-student/artifacts
+    logsPath: /srv/openclaw/outputs/ws-lab-student/logs

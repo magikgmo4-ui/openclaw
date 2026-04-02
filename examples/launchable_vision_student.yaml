@@ -1,0 +1,49 @@
+apiVersion: openclaw/v1
+kind: Launchable
+metadata:
+  name: vision-student
+  description: Profil vision local de developpement sur student
+  labels:
+    profile: vision
+    node: student
+spec:
+  profile: vision
+  agent:
+    id: vision-dev
+    image: openclaw/vision-dev:v1
+  workspace:
+    id: ws-vision-student
+    root: /srv/openclaw/workspaces/ws-vision-student
+    persistence: persistent
+  node:
+    target: student
+  bootstrap:
+    profile: vision
+    preset: vision-base
+    env:
+      OPENCLAW_MODE: vision
+      DATASET_SCOPE: local-dev
+  policy:
+    network:
+      mode: loopback-only
+    auth:
+      mode: local-user
+    sandbox:
+      mode: container
+    exposure:
+      defaultDeny: true
+  services:
+    - name: notebook
+      type: jupyter
+      enabled: true
+      bind: 127.0.0.1
+      port: 8890
+      visibility: loopback
+      auth: token
+  resources:
+    cpu: "8"
+    memory: 16Gi
+    gpu: 1
+  outputs:
+    artifactsPath: /srv/openclaw/outputs/ws-vision-student/artifacts
+    logsPath: /srv/openclaw/outputs/ws-vision-student/logs

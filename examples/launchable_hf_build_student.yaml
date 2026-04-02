@@ -1,0 +1,41 @@
+apiVersion: openclaw/v1
+kind: Launchable
+metadata:
+  name: hf-build-student
+  description: Build local de dependances et assets Hugging Face sur student
+  labels:
+    profile: hf_build
+    node: student
+spec:
+  profile: hf_build
+  agent:
+    id: hf-build-worker
+    image: openclaw/hf-build-worker:v1
+  workspace:
+    id: ws-hf-build-student
+    root: /srv/openclaw/workspaces/ws-hf-build-student
+    persistence: persistent
+  node:
+    target: student
+  bootstrap:
+    profile: hf_build
+    preset: hf-build-base
+    env:
+      OPENCLAW_MODE: hf_build
+      CACHE_POLICY: workspace-local
+  policy:
+    network:
+      mode: egress-controlled
+    auth:
+      mode: local-user
+    sandbox:
+      mode: container
+    exposure:
+      defaultDeny: true
+  services: []
+  resources:
+    cpu: "8"
+    memory: 16Gi
+  outputs:
+    artifactsPath: /srv/openclaw/outputs/ws-hf-build-student/artifacts
+    logsPath: /srv/openclaw/outputs/ws-hf-build-student/logs

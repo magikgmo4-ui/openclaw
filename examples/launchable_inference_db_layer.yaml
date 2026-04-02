@@ -1,0 +1,48 @@
+apiVersion: openclaw/v1
+kind: Launchable
+metadata:
+  name: inference-db-layer
+  description: Inference locale de validation bornee sur db-layer
+  labels:
+    profile: inference
+    node: db-layer
+spec:
+  profile: inference
+  agent:
+    id: inference-local
+    image: openclaw/inference-local:v1
+  workspace:
+    id: ws-inference-db-layer
+    root: /srv/openclaw/workspaces/ws-inference-db-layer
+    persistence: persistent
+  node:
+    target: db-layer
+  bootstrap:
+    profile: inference
+    preset: api-minimal
+    env:
+      OPENCLAW_MODE: inference
+      SERVE_SCOPE: local-validation
+  policy:
+    network:
+      mode: loopback-only
+    auth:
+      mode: token
+    sandbox:
+      mode: restricted-container
+    exposure:
+      defaultDeny: true
+  services:
+    - name: inference-api
+      type: http-api
+      enabled: true
+      bind: 127.0.0.1
+      port: 8080
+      visibility: loopback
+      auth: token
+  resources:
+    cpu: "4"
+    memory: 8Gi
+  outputs:
+    artifactsPath: /srv/openclaw/outputs/ws-inference-db-layer/artifacts
+    logsPath: /srv/openclaw/outputs/ws-inference-db-layer/logs

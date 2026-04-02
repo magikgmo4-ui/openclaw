@@ -1,0 +1,15 @@
+*.log
+logs/
+artifacts/
+outputs/
+.env
+.env.*
+*.secret
+*.secrets
+*.key
+*.pem
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*~
