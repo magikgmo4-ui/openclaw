@@ -29,7 +29,7 @@ Definir les regles de travail OpenClaw pour qu un nouvel operateur puisse repren
 
 Quand plusieurs documents existent, l ordre de priorite est:
 
-1. Etatreel valide (runbook terrain, preuve reelle)
+1. Etat reel valide (runbook terrain, preuve reelle)
 2. Spec canonique (SPEC_LAUNCHABLE_OPENCLAW_YAML_V1.md)
 3. Runbook (KB-301, KB-302, smoke, bootstrap)
 4. Documentation secondaire (exemples, notes)
@@ -38,14 +38,14 @@ En cas de contradiction entre documents, la source d indice inferieur ne peut pa
 
 ## 4. Regles d ouverture de session
 
-Une session OpenClaw est ouverte quand un operateur definit:
+Une session OpenClaw est ouverte quand un operateur definit :
 
-- But: quest-ce que cette session doit accomplishes
-- Perimetre: quoi inclure, quoi exclud
+- But: qu est-ce que cette session doit accomplir
+- Perimetre: quoi inclure, quoi exclure
 - Livrables attendus: fichiers, verifications, decisions
 - Point de depart: reference sur socle existant
 
-Une session doitbare un livrable minimal verifiable (pas seulement une liste d intentions).
+Une session doit avoir un livrable minimal verifiable (pas seulement une liste d intentions).
 
 ## 5. Classification des travaux
 
@@ -65,7 +65,7 @@ Une session doitbare un livrable minimal verifiable (pas seulement une liste d i
 
 - Un seul objectif operationnel
 - Delai court, resultat observable
-- Condition de close: preuve reelleCollectionnee
+- Condition de close: preuve reelle collectee
 
 ### 5.4 Implementation bornee
 
@@ -92,12 +92,12 @@ Une session doitbare un livrable minimal verifiable (pas seulement une liste d i
 
 - Aucune activation compute standard sur db-layer
 - Seule exception: inference locale de validation, bornee, loopback, non intensive, exceptionnelle
-- Si un service nest pas authorisable sur student, le verdict reste negatif, pas transporte vers db-layer
+- Si un service n est pas autorisable sur student, le verdict reste negatif, pas transporte vers db-layer
 
 ### 7.2 Protection de student
 
 - student est le compute local standard par defaut
-- Tout compute normal vise student jusqu acloud-gpu-future
+- Tout compute normal vise student jusqu a cloud-gpu-future
 - student ne devient pas un deuxieme control plane
 
 ### 7.3 Protection de cloud-gpu-future
@@ -129,7 +129,7 @@ Tout document de gouvernance doit contenir:
 - Pas de clone UI complet de Brev des le debut
 - Pas de chantier NIM/serverless maintenant
 - Pas de runtime reel sans preconditions validatees
-- Pas de doc marketingfloue ou operationnelle non definie
+- Pas de doc marketing floue ou operationnelle non definie
 
 ## 10. Condition de maturite minimale avant repo dedie
 

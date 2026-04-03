@@ -25,7 +25,7 @@ Regle operative : un chantier clos reste reference canonique tant qu une decisio
 - `KB-205` - `DONE` - result contract documentaire produit et fige.
 - `KB-301` - `DONE` - `student` est qualifie comme premier compute node local reel ; ne pas le rouvrir par reflexe.
 - `KB-302-POLICY` - `DONE` - policy des services exposables sur `student` classee ; ne pas la rouvrir pour un simple besoin de lecture.
-- `KB-302-LAB-JUPYTER-CLASSIFICATION` - `DONE` - le cas `lab` + `jupyter` loopback sur `student` est classe documentairemment.
+- `KB-302-LAB-JUPYTER-CLASSIFICATION` - `DONE` - le cas `lab` + `jupyter` loopback sur `student` est classe documentairement.
 - `SESSION-OPENING` - `DONE` - l ouverture minimale de session est maintenant indexee dans `SESSION_OPENING_INDEX.md`.
 - `REPO-BOUNDARIES` - `DONE` - le perimetre doc/gouvernance-only du futur repo est borne.
 - `WORKFLOW` - `DONE` - les regles de gouvernance, de closeout et de maturite minimale avant repo sont ecrites.

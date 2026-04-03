@@ -8,14 +8,14 @@ Definir les frontieres exactes du futur repo OpenClaw pour eviter tout melange a
 
 Le repo OpenClaw V1 contient uniquement la DOCUMENTATION CANONIQUE et la GOUVERNANCE du systeme. Il ne contient pas de code executable, de runtime, ni de configuration de production. Il est la SOURCE DE VERITE DOCUMENTAIRE pour tout operateur desireux de comprendre ou reproduire le systeme.
 
-Le repo ne remplace pas opt-trading. Il ne fait que documenter les concepts, les regles et les limites de l architecture OpenClaw. L execution relle reste dans l infra ciblee (student, cloud-gpu-future).
+Le repo ne remplace pas opt-trading. Il ne fait que documenter les concepts, les regles et les limites de l architecture OpenClaw. L execution reelle reste dans l infra ciblee (student, cloud-gpu-future).
 
 ## 3. Ce qui entre dans le repo
 
 ### 3.1 Documents de gouvernance
 
 - WORKFLOW_OPENCLAW.md
-- REPO_BOUNDARIES_OPENCLAW.md (CE DOCUMENT)
+- REPO_BOUNDARIES_OPENCLAW.md
 - ETABLI_OPENCLAW.md
 - SESSION_OPENING_INDEX.md
 - KANBAN_OPENCLAW.md
@@ -70,7 +70,7 @@ Tout ce qui est RUNTIME EFFECTIF ou INSTALLATION SPECIFIQUE est hors repo:
 
 ### 5.1 Control plane (db-layer)
 
-- NI enterte NI executee dans le repo OpenClaw
+- Ni hebergee ni executee dans le repo OpenClaw
 - Document uniquement: le role de db-layer est decrit dans INFRA_ROLE_MAPPING_OPENCLAW_V1.md
 - Toute activation compute sur db-layer est une violation doctrinale documentee
 
@@ -86,7 +86,7 @@ opt-trading est le repo canonique sur sot/mainline. Il doit rester SEPARE d Open
 
 - opt-trading = code de trading, configs de production, scripts operationnels
 - OpenClaw repo = documentation et gouvernance du framework Brev-like
-- Aucune confusion: opt-trading ne depende pas d OpenClaw pour fonctionner
+- Aucune confusion: opt-trading ne depend pas d OpenClaw pour fonctionner
 - OpenClaw documente un CONCEPT, pas une dependance d opt-trading
 
 Si une separation physique est necessaire (pas de sous-modules opt-trading vers OpenClaw), cette separation doit etre respectee.
@@ -97,7 +97,7 @@ localcms est un repo documentaire orthogonal. Il doit rester SEPARE d OpenClaw.
 
 - localcms = documentation d un autre systeme
 - OpenClaw = documentation d un framework Brev-like
-- Pas de depende entre eux
+- Pas de dependance entre eux
 - Le workflow documentaire peut etre similaire, mais ce sont des projets distincts
 
 ## 8. Frontiere avec cloud-gpu-future
@@ -119,12 +119,12 @@ cloud-gpu-future est une CIBLE DOCUMENTAIRE FUTURE, pas une configuration active
 
 ## 10. Condition de validite des frontieres
 
-Les frontieres sont reputees valides si:
+Les frontieres sont reputees valides si :
 
 - Aucune configuration runtime effective n est presente dans le repo
--aucune cred ntielle ou secret nest stocke
--la separation db-layer / student / cloud-gpu-future est respectee
--opt-trading et localcms ne dependent pas fonctionnellement d OpenClaw
--le repo ne contient que de la documentation et de la gouvernance
+- aucune credential ou secret n est stocke
+- la separation db-layer / student / cloud-gpu-future est respectee
+- opt-trading et localcms ne dependent pas fonctionnellement d OpenClaw
+- le repo ne contient que de la documentation et de la gouvernance
 
 Ces frontieres doivent etre respectees avant toute creation effective du repo GitHub.

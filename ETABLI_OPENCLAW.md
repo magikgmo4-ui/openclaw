@@ -4,11 +4,11 @@
 
 Documenter l etat etabli minimal d OpenClaw sans exposer de secrets. Ce document indique ce qui est reellement etabli, ce qui ne l est pas, et les limites a respecter pour eviter une lecture erronee de maturite.
 
-## 2. Perimetre du etabli
+## 2. Perimetre de l etabli
 
 Ce document decrit:
 - Les machines et roles retenus comme canoniques
-- Les elements documentaires rellement produits
+- Les elements documentaires reellement produits
 - Les elements non etablis ou futurs
 - Les limites operatoires a respecter
 
@@ -56,8 +56,8 @@ Role cloud-gpu-future = cible future documentaire, pas d activation runtime.
 
 ### 4.3 Gouvernance
 
-- WORKFLOW_OPENCLAW.md (CE DOCUMENT)
-- REPO_BOUNDARIES_OPENCLAW.md (CE DOCUMENT)
+- WORKFLOW_OPENCLAW.md
+- REPO_BOUNDARIES_OPENCLAW.md
 
 ### 4.4 Exemples
 
@@ -77,7 +77,7 @@ Role cloud-gpu-future = cible future documentaire, pas d activation runtime.
 - Dashboard operateur
 - Integrations cloud GPU
 
-### 5.2 Futurs documentes mais non actues
+### 5.2 Futurs documentes mais non actifs
 
 - cloud-gpu-future: aucun runtime actif
 - localcms: pas de dependance avec OpenClaw
