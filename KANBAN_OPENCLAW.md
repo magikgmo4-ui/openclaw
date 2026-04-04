@@ -26,6 +26,7 @@ Regle operative : un chantier clos reste reference canonique tant qu une decisio
 - `KB-301` - `DONE` - `student` est qualifie comme premier compute node local reel ; ne pas le rouvrir par reflexe.
 - `KB-302-POLICY` - `DONE` - policy des services exposables sur `student` classee ; ne pas la rouvrir pour un simple besoin de lecture.
 - `KB-302-LAB-JUPYTER-CLASSIFICATION` - `DONE` - le cas `lab` + `jupyter` loopback sur `student` est classe documentairement.
+- `KB-302-LAB-JUPYTER-LOCAL-OPEN` - `DONE` - le cas `lab` + `jupyter` loopback sur `student` est maintenant prouve en execution reelle borne, sans LAN/public et sans derive de chantier.
 - `SESSION-OPENING` - `DONE` - l ouverture minimale de session est maintenant indexee dans `SESSION_OPENING_INDEX.md`.
 - `REPO-BOUNDARIES` - `DONE` - le perimetre doc/gouvernance-only du futur repo est borne.
 - `WORKFLOW` - `DONE` - les regles de gouvernance, de closeout et de maturite minimale avant repo sont ecrites.
@@ -40,7 +41,6 @@ Prochain pas logique immediat : produire `README.md`, puis relancer une revalida
 
 ## 5. FUTUR
 
-- `KB-302-RUNBOOK-LOCAL` - `FUTUR` - runbook local borne disponible pour `lab` + `jupyter`, mais son execution reelle n est pas active par defaut.
 - `KB-303` - `FUTUR` - dashboard / UI operateur legere ; sujet reconnu, non actif.
 - `KB-304` - `FUTUR` - integration cloud GPU ; cible documentaire future, pas de runtime actif.
 - `KB-305` - `FUTUR` - inference / model serving / endpoints GPU ; sujet reconnu, non actif.

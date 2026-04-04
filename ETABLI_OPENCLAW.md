@@ -72,7 +72,6 @@ Role cloud-gpu-future = cible future documentaire, pas d activation runtime.
 ### 5.1 Non etablis
 
 - Runtime execution effectif sur student (au-dela du probe hf_build)
-- Service jupyter reel demarre sur student (classification faite, pas execution)
 - Pipeline de logs complet
 - Dashboard operateur
 - Integrations cloud GPU
@@ -90,11 +89,11 @@ Role cloud-gpu-future = cible future documentaire, pas d activation runtime.
 |---|---|---|
 | podman sur student | ETABLI PROBE | run --rm alpine true fonctionne |
 | docker sur student | NON TESTE | absent ou non utilise |
-| jupyter lab sur student | NON DEMARRE | classification faite, pas execution |
+| jupyter lab sur student | ETABLI BORNE | ouverture locale prouvee sur `lab`, bind `127.0.0.1`, port `8888`, auth `token`, sandbox `process`, sans LAN/public |
 | hf_build execution physique | DEPENDANT IMAGE | image declaree absente |
 | vision GPU compute | NON PROUVE | pas de nvidia-smi |
 
-Le runtime container est preuve fonctionnel uniquement avec podman. L execution applicative complete n est pas demontree au-dela du probe.
+Le runtime container est preuve fonctionnel uniquement avec podman. Une execution applicative locale bornee est maintenant prouvee pour le seul cas `lab` + `jupyter` sur `student`, en loopback strict, sans generaliser la maturite runtime globale.
 
 ## 7. Limites explicites
 
