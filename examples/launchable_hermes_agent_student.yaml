@@ -1,0 +1,20 @@
+id: hermes_agent_student_doc_v1
+name: Hermes Agent Student Documented Case V1
+purpose: >-
+  Documented and bounded Hermes Agent case for OpenClaw positioning and future
+  qualification on student without implying active runtime deployment.
+node_role: student
+execution_mode: document_only
+network_exposure: none
+auth_mode: token_externalized
+runtime_status: documented_only
+security_posture:
+  - no_secrets_in_repo
+  - no_public_exposure
+  - no_db_layer_compute
+  - no_runtime_claim_without_proof
+classification_hint: VALID_WITH_RESTRICTION
+notes: >-
+  This YAML is a documentation example only. It does not prove Hermes runtime
+  installation, packaging, service activation, or network exposure. Any future
+  qualification must remain bounded and aligned with OpenClaw governance.
