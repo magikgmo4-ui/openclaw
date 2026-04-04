@@ -23,6 +23,7 @@ Il ne remplace ni `opt-trading`, ni une infra runtime, ni un workspace d executi
 - cadrage : `OPENCLAW_BREV_LIKE_MASTER_PLAN_V1.md`, `INFRA_ROLE_MAPPING_OPENCLAW_V1.md`, `SECURITY_POLICY_OPENCLAW_BREV_V1.md`
 - spec et validation : `SPEC_LAUNCHABLE_OPENCLAW_YAML_V1.md`, `launchables_registry.yaml`, `VALIDATION_RULES_LAUNCHABLES_V1.md`, `VALIDATION_MATRIX_LAUNCHABLES_V1.md`, `bootstrap_contract_v1.md`, `RUNBOOK_LAUNCHABLE_SMOKE_V1.md`, `RESULT_CONTRACT_V1.md`
 - runbooks et rapports : `PHASE2_CLOSEOUT_CANONICAL_V1.md`, `KB301_STUDENT_NODE_INTEGRATION_RUNBOOK_V1.md`, `KB301_STUDENT_REAL_QUALIFICATION_REPORT_V1.md`, `KB302_EXPOSABLE_SERVICES_POLICY_V1.md`, `KB302_LAB_JUPYTER_CLASSIFICATION_REPORT_V1.md`, `KB302_LAB_JUPYTER_LOOPBACK_RUNBOOK_V1.md`
+- maquette locale : `KB303_MINIMAL_MOCKUP_V1.html`
 - exemples : `examples/launchable_lab_student.yaml`, `examples/launchable_vision_student.yaml`, `examples/launchable_hf_build_student.yaml`, `examples/launchable_training_cloud_future.yaml`, `examples/launchable_inference_db_layer.yaml`
 
 ## Ce que le repo ne contient pas

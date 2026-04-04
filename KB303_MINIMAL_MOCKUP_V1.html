@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenClaw KB303 Minimal Mockup V1</title>
+  <style>
+    :root {
+      --bg: #f3f0e8;
+      --panel: #fffdf8;
+      --panel-strong: #f7f3ea;
+      --ink: #1f2430;
+      --muted: #5f6570;
+      --line: #d8cfbf;
+      --accent: #1f5f5b;
+      --accent-soft: #d9ecea;
+      --warn: #8a5a14;
+      --warn-soft: #f6e7c9;
+      --ok: #22543d;
+      --ok-soft: #dcefe4;
+      --future: #6b46c1;
+      --future-soft: #ebe2fb;
+      --shadow: 0 16px 40px rgba(31, 36, 48, 0.08);
+      --radius: 18px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31, 95, 91, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(138, 90, 20, 0.08), transparent 24%),
+        linear-gradient(180deg, #f7f4ec 0%, var(--bg) 100%);
+      line-height: 1.5;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 40px;
+    }
+
+    .hero,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 28px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31, 95, 91, 0.10), transparent 68%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(32px, 5vw, 54px);
+      max-width: 11ch;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-grid,
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1.6fr 1fr;
+      align-items: end;
+      margin-top: 18px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 0;
+    }
+
+    .nav a,
+    .doc-link {
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav a:hover,
+    .doc-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .panel {
+      padding: 22px;
+      min-width: 0;
+    }
+
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .list,
+    .docs,
+    .chips,
+    .status-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .item,
+    .doc,
+    .status-item,
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--panel-strong);
+    }
+
+    .item strong,
+    .doc strong,
+    .status-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .kpi-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .kpi {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fffdfa 0%, #f4efe6 100%);
+    }
+
+    .kpi .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .kpi .label {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+
+    .chip.ok { background: var(--ok-soft); color: var(--ok); }
+    .chip.warn { background: var(--warn-soft); color: var(--warn); }
+    .chip.future { background: var(--future-soft); color: var(--future); }
+    .chip.neutral { background: #ece8df; color: var(--ink); }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .badge.done { background: var(--ok-soft); color: var(--ok); }
+    .badge.close { background: #e6edf7; color: #224c7a; }
+    .badge.future { background: var(--future-soft); color: var(--future); }
+    .badge.limit { background: var(--warn-soft); color: var(--warn); }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .kpi-row,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .span-4,
+      .span-5,
+      .span-6,
+      .span-7,
+      .span-8,
+      .span-12 {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero" id="overview">
+      <span class="eyebrow">KB-303 / Mockup V1</span>
+      <h1>OpenClaw Operator Read-Only</h1>
+      <p>
+        Maquette locale, statique et lecture seule. Elle aide un operateur a lire le corpus canonique OpenClaw sans backend,
+        sans exposition reseau et sans derive vers une plateforme operateur complete.
+      </p>
+
+      <div class="hero-grid">
+        <div>
+          <nav class="nav" aria-label="Navigation locale">
+            <a href="#overview">Accueil</a>
+            <a href="#documents">Documents cles</a>
+            <a href="#state">Etat / Kanban</a>
+            <a href="#roles">Roles / Nodes</a>
+            <a href="#reprise">Points de reprise</a>
+          </nav>
+        </div>
+
+        <div class="note">
+          <h3>Lecture operative</h3>
+          <p>
+            Source de verite : le repo <span class="mono">openclaw</span>. Cette maquette ne lance rien, ne collecte rien,
+            et ne remplace ni les runbooks ni les closeouts.
+          </p>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="label">Mode</div>
+          <div class="value">Lecture seule</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Repo</div>
+          <div class="value">Doc-only</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Runtime prouve</div>
+          <div class="value">1 cas borne</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel span-6" id="documents">
+        <h2>Documents cles</h2>
+        <p>Point d entree minimal pour un operateur. Navigation documentaire seulement.</p>
+        <div class="docs">
+          <div class="doc">
+            <strong>README.md</strong>
+            <p>Definition courte d OpenClaw, perimetre du repo, limites explicites.</p>
+          </div>
+          <div class="doc">
+            <strong>WORKFLOW_OPENCLAW.md</strong>
+            <p>Regles de travail, closeout, priorite des sources, protection d architecture.</p>
+          </div>
+          <div class="doc">
+            <strong>REPO_BOUNDARIES_OPENCLAW.md</strong>
+            <p>Frontieres du repo, separation doc/runtime, separation control plane / compute plane.</p>
+          </div>
+          <div class="doc">
+            <strong>ETABLI_OPENCLAW.md</strong>
+            <p>Etat acquis reel, limites de maturite et cas runtime borne deja prouve.</p>
+          </div>
+          <div class="doc">
+            <strong>KANBAN_OPENCLAW.md</strong>
+            <p>Lecture compacte des chantiers clos, futurs et hors perimetre immediat.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel span-6" id="state">
+        <h2>Etat / Kanban</h2>
+        <p>Lecture compacte des statuts canoniques en V1, sans orchestration ni supervision live.</p>
+        <div class="status-list">
+          <div class="status-item">
+            <div class="status-line"><strong>PHASE-2-SOCLE</strong><span class="badge close">CLOSE</span></div>
+            <p>Socle documentaire versionnable fige.</p>
+          </div>
+          <div class="status-item">
+            <div class="status-line"><strong>KB-301</strong><span class="badge done">DONE</span></div>
+            <p><span class="mono">student</span> qualifie comme compute local standard.</p>
+          </div>
+          <div class="status-item">
+            <div class="status-line"><strong>KB-302-POLICY</strong><span class="badge done">DONE</span></div>
+            <p>Policy des services exposables sur <span class="mono">student</span> classee.</p>
+          </div>
+          <div class="status-item">
+            <div class="status-line"><strong>KB-302-LAB-JUPYTER-LOCAL-OPEN</strong><span class="badge done">DONE</span></div>
+            <p>Cas borne prouve en reel : <span class="mono">lab + jupyter</span> en loopback strict.</p>
+          </div>
+          <div class="status-item">
+            <div class="status-line"><strong>KB-303</strong><span class="badge future">FUTUR</span></div>
+            <p>UI operateur legere. Ce mockup est un premier livrable local de lecture seule.</p>
+          </div>
+          <div class="status-item">
+            <div class="status-line"><strong>KB-304 / KB-305</strong><span class="badge future">FUTUR</span></div>
+            <p>Cloud GPU et serving restent hors de cette maquette.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel span-5" id="roles">
+        <h2>Roles / Nodes</h2>
+        <p>Rappel des roles canoniques. Aucun glissement de compute standard sur <span class="mono">db-layer</span>.</p>
+        <div class="list">
+          <div class="item">
+            <strong>db-layer</strong>
+            <p>Control plane uniquement. Pas de compute generaliste. Pas d host operateur actif.</p>
+          </div>
+          <div class="item">
+            <strong>student</strong>
+            <p>Compute local standard. Seul node avec un cas runtime borne prouve en V1.</p>
+          </div>
+          <div class="item">
+            <strong>cloud-gpu-future</strong>
+            <p>Cible documentaire future. Aucune activation runtime ni surface cloud ici.</p>
+          </div>
+        </div>
+        <div class="chip-row">
+          <span class="chip ok">student = ETABLI</span>
+          <span class="chip neutral">db-layer = control plane</span>
+          <span class="chip future">cloud-gpu-future = FUTUR</span>
+        </div>
+      </article>
+
+      <article class="panel span-7">
+        <h2>Runtime Proofs</h2>
+        <p>Rappel du seul cas runtime borne deja prouve. Aucun detail sensible, aucun pilotage runtime.</p>
+        <div class="list">
+          <div class="item">
+            <strong>Cas prouve</strong>
+            <p><span class="mono">lab + jupyter</span> sur <span class="mono">student</span>, bind <span class="mono">127.0.0.1</span>, port <span class="mono">8888</span>, auth <span class="mono">token</span>, sandbox <span class="mono">process</span>.</p>
+          </div>
+          <div class="item">
+            <strong>Preuves minimales retenues</strong>
+            <p>PID vivant, listener loopback, reponse HTTP locale, log minimal, artefact minimal.</p>
+          </div>
+          <div class="item">
+            <strong>Lecture correcte</strong>
+            <p>Ce succes borne n ouvre ni LAN/public, ni dashboard large, ni serving, ni cloud GPU.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel span-8" id="reprise">
+        <h2>Points de reprise</h2>
+        <p>Ordre de lecture operatoire pour reprendre proprement depuis la source de verite documentaire.</p>
+        <div class="list">
+          <div class="item">
+            <strong>Demarrage minimal</strong>
+            <p>1. <span class="mono">WORKFLOW_OPENCLAW.md</span>  2. <span class="mono">REPO_BOUNDARIES_OPENCLAW.md</span>  3. <span class="mono">ETABLI_OPENCLAW.md</span></p>
+          </div>
+          <div class="item">
+            <strong>Reprise de passe V1</strong>
+            <p>Lire ensuite <span class="mono">README.md</span>, <span class="mono">SESSION_OPENING_INDEX.md</span>, <span class="mono">KANBAN_OPENCLAW.md</span>.</p>
+          </div>
+          <div class="item">
+            <strong>Reprise du cas borne prouve</strong>
+            <p>Considérer <span class="mono">KB-302-LAB-JUPYTER-LOCAL-OPEN</span> comme acquis et clos. Ne pas le rouvrir par reflexe.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel span-4">
+        <h2>Garde-fous</h2>
+        <p>Interdits du livrable minimal KB-303.</p>
+        <div class="chip-row">
+          <span class="chip warn">pas de backend</span>
+          <span class="chip warn">pas d API</span>
+          <span class="chip warn">pas de LAN/public</span>
+          <span class="chip warn">pas de cloud</span>
+          <span class="chip warn">pas de serving</span>
+          <span class="chip warn">pas de multi-tenant</span>
+        </div>
+        <p class="footer-note">
+          Si une vue suppose lancement, exposition, orchestration, federation ou prediction, elle sort de KB-303 minimal.
+        </p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
