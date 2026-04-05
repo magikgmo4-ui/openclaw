@@ -59,7 +59,12 @@ Role cloud-gpu-future = cible future documentaire, pas d activation runtime.
 - WORKFLOW_OPENCLAW.md
 - REPO_BOUNDARIES_OPENCLAW.md
 
-### 4.4 Exemples
+### 4.4 UI operateur bornee
+
+- KB303_MINIMAL_MOCKUP_V1.html
+- Premiere surface operateur locale, statique, lecture seule, sans backend ni reseau
+
+### 4.5 Exemples
 
 - examples/launchable_lab_student.yaml
 - examples/launchable_vision_student.yaml
@@ -73,7 +78,7 @@ Role cloud-gpu-future = cible future documentaire, pas d activation runtime.
 
 - Runtime execution effectif sur student (au-dela du probe hf_build)
 - Pipeline de logs complet
-- Dashboard operateur
+- Dashboard operateur large
 - Integrations cloud GPU
 
 ### 5.2 Futurs documentes mais non actifs
